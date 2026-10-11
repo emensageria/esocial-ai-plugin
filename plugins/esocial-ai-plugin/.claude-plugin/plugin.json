@@ -1,0 +1,19 @@
+{
+  "name": "esocial-ai-plugin",
+  "displayName": "eSocial AI Plugin",
+  "version": "0.1.0",
+  "description": "Skills técnicas eSocial e orientação de conexão opcional com MCP eMensageria",
+  "author": {
+    "name": "eMensageria",
+    "url": "https://www.emensageria.com.br"
+  },
+  "homepage": "https://github.com/marcelomdevasconcellos/esocial-ai-plugin",
+  "repository": "https://github.com/marcelomdevasconcellos/esocial-ai-plugin",
+  "license": "MIT",
+  "keywords": [
+    "esocial",
+    "xml",
+    "mcp",
+    "brasil"
+  ]
+}
