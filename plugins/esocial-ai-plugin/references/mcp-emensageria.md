@@ -1,30 +1,42 @@
-# MCP remoto eMensageria — fonte viva
+# MCP eMensageriaPro v2 — configuração publicada
 
-**Fonte canônica:** https://www.emensageria.com.br/ia-mcp/
+Fonte: HTML atualizado de https://www.emensageria.com.br/ia-mcp/ , fornecido em 11/10/2026.
 
-> Aviso de atualização (11-10-2026): o proprietário confirmou alterações recentes no **endpoint MCP** e no **método de autenticação**. Ferramentas externas de busca podem apresentar conteúdo anterior em cache. Não utilizar, publicar ou inferir valores a partir de páginas indexadas antigas.
+## Conexão
 
-## Configuração recomendada
+- Endpoint HTTPS único: `https://app.emensageria.com.br/esocial/mcp/v2/`
+- Transporte: **MCP Streamable HTTP**
+- Autenticação: **OAuth**, com login e consentimento no sistema eMensageriaPro.
+- No consentimento, o usuário seleciona **contas, ambientes e operações autorizadas**, sem ambiente automático.
+- Apenas contas com vínculo ativo podem ser autorizadas, inclusive quando o usuário é administrador.
+- URLs antigas baseadas em subdomínio e ambiente foram desativadas. Cadastre uma nova conexão OAuth; não use token manual da versão antiga.
+- Gerenciamento/revogação: https://app.emensageria.com.br/oauth/mcp/connections/
 
-1. Consulte a página oficial em navegador com conteúdo atualizado ou a documentação disponibilizada pela plataforma autenticada.
-2. Confirme a URL HTTPS efetiva do endpoint e o tipo atual de autenticação oferecido no cliente.
-3. Insira credenciais apenas no fluxo oficial de conexão do cliente de IA. Não as envie como texto à conversa nem as insira em arquivos versionados.
-4. Com a conexão autorizada, obtenha `tools/list` para descobrir nomes, descrições, permissões e schemas efetivos das ferramentas.
-5. Faça primeiro testes de leitura e validação em ambiente de testes, com dados sintéticos.
-6. Antes de operações de escrita, o operador deve conferir conta, ambiente, recurso de destino e efeito da operação.
+## Argumentos obrigatórios por ferramenta de negócio
 
-## O que o plugin NÃO presume
+```json
+{
+  "codigo_conta": "empresa-exemplo",
+  "ambiente": "producao-restrita"
+}
+```
 
-- Não presume URL de endpoint atual ou versão do transporte.
-- Não presume Bearer token, OAuth ou outro mecanismo enquanto a alteração recente não for confirmada em conteúdo atual.
-- Não presume quais métodos estão disponíveis: a lista em `tools/list` é a fonte da sessão autenticada.
-- Não presume que o MCP atualmente exige `codigo_conta` e `ambiente`; essa é uma política requerida para a evolução da interface.
+`ambiente` admite somente `producao` e `producao-restrita`. O usuário deve informar ambos explicitamente em **cada ferramenta**; não inferir de chamadas anteriores. No backend, a autorização deve ser verificada com base em identidade OAuth, contas e ambientes consentidos, operação solicitada e vínculo ativo. Métodos internos do protocolo (`initialize`, `tools/list`) não recebem parâmetros de negócio.
 
-## Contrato desejado para operações de negócio
+## Operações sensíveis
 
-Cada operação de negócio deverá receber dois argumentos **obrigatórios**:
+A página descreve **revisão e aprovação na própria eMensageria** para transmissões, autorizações de envio e exclusões. Após a aprovação, o operador retorna ao cliente para executar a operação autorizada. Não confundir aprovação na IA com aprovação operacional na plataforma.
 
-- `codigo_conta`: string, código da conta/tenant.
-- `ambiente`: enum `producao` ou `producao-restrita`.
+## Privacidade e segurança
 
-O backend deve revalidar autorização em toda chamada, inclusive consultas. Isso não altera métodos internos do protocolo MCP, como `initialize` ou `tools/list`. Consulte [contrato proposto](contrato-mcp-proposto.md).
+Nunca solicite nem transmita senhas, tokens OAuth, refresh tokens, códigos de autorização, PFX/Base64, certificados A1 ou chaves privadas como argumentos de ferramenta ou texto do chat. O cadastro de certificados deve ocorrer na interface oficial eMensageria. Faça o login apenas no domínio oficial, minimize dados pessoais enviados a provedores de IA e proteja logs e armazenamento. Revogue conexões em caso de exposição.
+
+## Descoberta de ferramentas
+
+A documentação pública cita consulta de eventos, listagem de lotes, revisão/validação de XML e metadados. **Nomes precisos e schemas de tools ainda requerem `tools/list` numa sessão autorizada.** O HTML documenta o contrato de conexão, mas não prova que uma autenticação foi executada com sucesso.
+
+## Compatibilidade
+
+Há manifestos/configurações para clientes de plugins no repositório. Clientes ChatGPT, Claude, Codex e outros podem oferecer fluxos distintos de cadastro; use a URL única com OAuth no fluxo compatível com cada cliente. O instalador de skills por si só não concede acesso à conta.
+
+Consulte também [Contrato das ferramentas](contrato-mcp-proposto.md).
