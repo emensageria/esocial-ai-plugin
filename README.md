@@ -31,11 +31,20 @@ A instalação do plugin **não autentica** automaticamente o MCP da eMensageria
 
 O diretório `plugins/esocial-ai-plugin` contém o manifesto portátil `plugin.json` e skills `SKILL.md`. Ele pode ser empacotado em ZIP e submetido para revisão no diretório OpenAI. **Publicação no GitHub não significa aprovação ou instalação no ChatGPT**. Ver [documentação de plugins OpenAI](https://developers.openai.com/plugins/build/plugins).
 
-## MCP eMensageria (opcional)
+## MCP eMensageriaPro v2 (opcional)
 
-A documentação oficial do MCP foi atualizada em outubro de 2026: o endpoint e o mecanismo de autenticação anteriores mudaram. **Consulte os dados atuais em https://www.emensageria.com.br/ia-mcp/ antes de configurar a conexão.** Evite exemplos em cache e não compartilhe credenciais. É preciso configurar a conexão autorizada separadamente. Nenhum endpoint novo é presumido neste repositório: a URL e a autenticação atuais devem vir da documentação oficial. Leia [MCP eMensageria](plugins/esocial-ai-plugin/references/mcp-emensageria.md).
+A versão publicada do MCP possui endpoint único `https://app.emensageria.com.br/esocial/mcp/v2/`, transporte **Streamable HTTP** e autenticação **OAuth com consentimento no site da eMensageria**. As URLs anteriores foram desativadas.
 
-**Contrato desejado para a próxima versão do MCP:** cada *ferramenta de negócio* deverá exigir explicitamente `codigo_conta` e `ambiente` (`producao` ou `producao-restrita`), com autorização efetiva no servidor. O plugin não modifica o backend automaticamente.
+Cada ferramenta de negócio deve receber explicitamente `codigo_conta` e `ambiente` (`producao` ou `producao-restrita`). Durante a autorização OAuth, o usuário seleciona contas com vínculo ativo, ambientes e operações; o sistema não escolhe ambiente padrão.
+
+Transmissões, autorizações de envio e exclusões exigem revisão e aprovação na eMensageria antes da execução pelo cliente. As ferramentas efetivamente disponíveis devem ser descobertas com `tools/list` autenticado.
+
+- [Instruções do MCP](plugins/esocial-ai-plugin/references/mcp-emensageria.md)
+- [Contrato das ferramentas](plugins/esocial-ai-plugin/references/contrato-mcp-proposto.md)
+- [Página oficial atualizada](https://www.emensageria.com.br/ia-mcp/)
+- [Gerenciar e revogar conexões](https://app.emensageria.com.br/oauth/mcp/connections/)
+
+O plugin contém as skills e configuração declarativa, mas **não conecta automaticamente** a conta eMensageria nem comprova uma sessão OAuth real.
 
 ## Fontes oficiais
 
