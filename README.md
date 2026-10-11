@@ -33,13 +33,7 @@ O diretório `plugins/esocial-ai-plugin` contém o manifesto portátil `plugin.j
 
 ## MCP eMensageria (opcional)
 
-A documentação pública descreve um MCP remoto autenticado por Bearer Token, com endpoint específico por conta e ambiente:
-
-```text
-https://app.emensageria.com.br/esocial/mcp/<subdominio>/<ambiente>/
-```
-
-É preciso configurar a conexão autorizada separadamente. O endpoint único `/esocial/mcp/v2/` **é apenas uma proposta futura**; o repositório não declara nem anuncia esse endereço como ativo. Leia [MCP eMensageria](plugins/esocial-ai-plugin/references/mcp-emensageria.md).
+A documentação oficial do MCP foi atualizada em outubro de 2026: o endpoint e o mecanismo de autenticação anteriores mudaram. **Consulte os dados atuais em https://www.emensageria.com.br/ia-mcp/ antes de configurar a conexão.** Evite exemplos em cache e não compartilhe credenciais. É preciso configurar a conexão autorizada separadamente. Nenhum endpoint novo é presumido neste repositório: a URL e a autenticação atuais devem vir da documentação oficial. Leia [MCP eMensageria](plugins/esocial-ai-plugin/references/mcp-emensageria.md).
 
 **Contrato desejado para a próxima versão do MCP:** cada *ferramenta de negócio* deverá exigir explicitamente `codigo_conta` e `ambiente` (`producao` ou `producao-restrita`), com autorização efetiva no servidor. O plugin não modifica o backend automaticamente.
 
