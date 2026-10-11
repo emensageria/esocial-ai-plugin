@@ -1,0 +1,36 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "esocial-ai-plugin",
+  "version": "0.1.0",
+  "description": "Skills abertas para orientação técnica sobre eSocial e configuração opcional do MCP eMensageria.",
+  "author": {
+    "name": "eMensageria",
+    "url": "https://www.emensageria.com.br"
+  },
+  "homepage": "https://github.com/marcelomdevasconcellos/esocial-ai-plugin",
+  "repository": "https://github.com/marcelomdevasconcellos/esocial-ai-plugin",
+  "license": "MIT",
+  "keywords": [
+    "esocial",
+    "brasil",
+    "xml",
+    "mcp",
+    "compliance"
+  ],
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/esocial-mcp-emensageria/SKILL.md",
+      "interface": {
+        "displayName": "eSocial AI Plugin",
+        "shortDescription": "Orientações técnicas eSocial e MCP opcional",
+        "longDescription": "Analise documentação, estrutura de XML e rejeições do eSocial com referências oficiais. A integração com o MCP remoto eMensageria é opcional e requer configuração separada.",
+        "developerName": "eMensageria",
+        "category": "Productivity",
+        "capabilities": [
+          "Read"
+        ],
+        "websiteURL": "https://www.emensageria.com.br/ia-mcp/"
+      }
+    }
+  }
+}
