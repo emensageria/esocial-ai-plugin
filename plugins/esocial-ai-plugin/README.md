@@ -1,36 +1,36 @@
 # eSocial AI Plugin
 
-Plugin público **não oficial** com skills para agentes de IA que trabalham com eventos e XML do eSocial brasileiro. Contém instruções independentes de qualquer serviço, além de uma skill de integração **opcional** ao MCP da eMensageriaPro.
+Plugin público **não oficial** com cinco skills para orientação técnica do eSocial e integração opcional ao MCP eMensageriaPro.
 
-## Skills incluídas
+## Skills
 
-| Skill | Uso |
-| --- | --- |
-| [esocial-documentacao](skills/esocial-documentacao/SKILL.md) | Consulta de leiautes, regras e notas técnicas com fontes e vigência |
-| [esocial-xml](skills/esocial-xml/SKILL.md) | Diagnóstico de XML, estrutura, namespace e validação XSD |
-| [esocial-erros](skills/esocial-erros/SKILL.md) | Tratamento de retornos, rejeições, protocolos e retentativas |
-| [esocial-integracao](skills/esocial-integracao/SKILL.md) | Boas práticas para integração eSocial: segurança, idempotência e auditoria |
-| [esocial-mcp-emensageria](skills/esocial-mcp-emensageria/SKILL.md) | Configuração e operação segura do MCP remoto eMensageria |
+- [Documentação](skills/esocial-documentacao/SKILL.md)
+- [Validação e revisão de XML](skills/esocial-xml/SKILL.md)
+- [Diagnóstico de erros](skills/esocial-erros/SKILL.md)
+- [Integração técnica](skills/esocial-integracao/SKILL.md)
+- [MCP eMensageria](skills/esocial-mcp-emensageria/SKILL.md)
 
-## MCP remoto eMensageria
+## MCP eMensageriaPro v2
 
-**Documentação oficial e atualizada:** https://www.emensageria.com.br/ia-mcp/
+- **URL:** `https://app.emensageria.com.br/esocial/mcp/v2/`
+- **Transporte:** Streamable HTTP
+- **Autenticação:** OAuth por login e consentimento na eMensageria
+- **Campos em cada ferramenta de negócio:** `codigo_conta` e `ambiente` (`producao` ou `producao-restrita`)
+- **Aprovações:** transmissões, autorizações de envio e exclusões requerem revisão e aprovação na eMensageria
+- **Conexões:** https://app.emensageria.com.br/oauth/mcp/connections/
 
-O endereço do servidor MCP e o método de autenticação da eMensageria foram alterados em outubro de 2026. Por isso, esta versão **não fixa** URL de endpoint nem mecanismo de autenticação. Consulte a página oficial ao conectar o cliente de IA e use os dados fornecidos no próprio sistema eMensageria. **Não copie configurações antigas.**
+As URLs antigas foram desativadas. O consentimento restringe contas, ambientes e operações. Apenas contas com vínculo ativo ficam disponíveis, inclusive para administradores.
 
-A instalação destas skills não cria uma conexão MCP nem fornece acesso a dados privados. Nomes e schemas de ferramentas somente podem ser conhecidos mediante conexão autorizada e descoberta `tools/list`.
+A instalação do plugin não concede automaticamente acesso ao MCP; o usuário deve concluir o OAuth no cliente compatível. Não coloque tokens, certificados, senhas ou dados pessoais em prompts.
 
-A exigência de `codigo_conta` e `ambiente` para todas as ferramentas de negócio faz parte de um [contrato recomendado](references/contrato-mcp-proposto.md), devendo ser confirmada no backend atual antes de qualquer instrução de execução.
+## Documentos
+
+- [Conexão MCP detalhada](references/mcp-emensageria.md)
+- [Contrato de ferramentas](references/contrato-mcp-proposto.md)
+- [Página oficial](https://www.emensageria.com.br/ia-mcp/)
+
+Os nomes reais das ferramentas somente devem ser determinados após `tools/list` autenticado. A página oficial documenta a integração; não foi executado teste de autenticação real nesta publicação.
 
 ## Compatibilidade
 
-O pacote contém o manifesto portátil `plugin.json`, skills no padrão Agent Skills e o manifesto do Claude Code em `.claude-plugin/plugin.json`. A configuração remota de MCP será incorporada a `mcp.json` **somente depois da confirmação verificável do novo endpoint e autenticação**. Publicar no GitHub não implica aprovação no diretório de plugins do ChatGPT.
-
-## Segurança
-
-- Não registre tokens, certificados A1, senhas ou dados pessoais de trabalhadores no GitHub ou no chat.
-- Antes de transmitir, excluir ou retificar eventos, confirme a conta, o ambiente e o impacto da operação com o operador.
-- Nunca afirme que um XML passou na validação XSD ou que um evento foi enviado sem resultado real.
-- Confira a documentação oficial, versão, notas técnicas e vigência.
-
-Veja também o [README raiz](../../README.md).
+Inclui manifesto portátil `plugin.json`, `mcp.json`, manifesto Claude `.claude-plugin/plugin.json` e skills `SKILL.md`. A validação final de carregamento depende da versão do cliente, e a publicação em diretórios oficiais exige revisão própria.
