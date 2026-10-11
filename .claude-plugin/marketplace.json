@@ -1,0 +1,14 @@
+{
+  "name": "esocial-ai",
+  "description": "Marketplace público para skills eSocial e integração opcional eMensageria",
+  "owner": {
+    "name": "eMensageria"
+  },
+  "plugins": [
+    {
+      "name": "esocial-ai-plugin",
+      "source": "./plugins/esocial-ai-plugin",
+      "description": "Skills abertas eSocial com referência opcional ao MCP eMensageria"
+    }
+  ]
+}
