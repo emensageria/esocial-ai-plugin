@@ -2,7 +2,7 @@
   "name": "esocial-ai-plugin",
   "displayName": "eSocial AI Plugin",
   "version": "0.1.0",
-  "description": "Skills técnicas eSocial e orientação de conexão opcional com MCP eMensageria",
+  "description": "Skills técnicas eSocial com MCP remoto eMensageriaPro via OAuth",
   "author": {
     "name": "eMensageria",
     "url": "https://www.emensageria.com.br"
@@ -15,5 +15,11 @@
     "xml",
     "mcp",
     "brasil"
-  ]
+  ],
+  "mcpServers": {
+    "emensageria": {
+      "type": "http",
+      "url": "https://app.emensageria.com.br/esocial/mcp/v2/"
+    }
+  }
 }
